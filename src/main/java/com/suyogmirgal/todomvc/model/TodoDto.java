@@ -13,7 +13,7 @@ public class TodoDto {
 
   private final int id;
   private final String title;
-  private final int order;
+  private final Integer order;
   private final boolean isCompleted;
   private final Timestamp createdDate;
   private final Timestamp updatedDate;
@@ -28,7 +28,7 @@ public class TodoDto {
    * @param createdDate date on which todo item is created.
    * @param updatedDate date on which tot item is updated.
    */
-  public TodoDto(int id, String title, int order, boolean isCompleted, Timestamp createdDate,
+  public TodoDto(int id, String title, Integer order, boolean isCompleted, Timestamp createdDate,
       Timestamp updatedDate) {
     this.id = id;
     this.title = title;
@@ -61,7 +61,7 @@ public class TodoDto {
    *
    * @return order for the todo item.
    */
-  public int getOrder() {
+  public Integer getOrder() {
     return order;
   }
 
