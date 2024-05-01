@@ -1,6 +1,7 @@
 package com.suyogmirgal.todomvc.model;
 
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
 
 /**
  * This class instance is used as DTO which holds
@@ -15,8 +16,8 @@ public class TodoDto {
   private final String title;
   private final Integer order;
   private final boolean isCompleted;
-  private final Timestamp createdDate;
-  private final Timestamp updatedDate;
+  private final LocalDateTime createdDate;
+  private final LocalDateTime updatedDate;
 
   /**
    * Parameterized constructor for {@link TodoDto}
@@ -24,12 +25,12 @@ public class TodoDto {
    * @param id id of the todo.
    * @param title title for the todo.
    * @param order order for the todo.
-   * @param isCompleted flag which tells if todo is completed or not.
-   * @param createdDate date on which todo item is created.
-   * @param updatedDate date on which tot item is updated.
+   * @param isCompleted flag which tells if todo is isCompleted or not.
+   * @param createdDate date time on which todo item is created.
+   * @param updatedDate date time on which tot item is updated.
    */
-  public TodoDto(int id, String title, Integer order, boolean isCompleted, Timestamp createdDate,
-      Timestamp updatedDate) {
+  public TodoDto(int id, String title, Integer order, boolean isCompleted,
+      LocalDateTime createdDate, LocalDateTime updatedDate) {
     this.id = id;
     this.title = title;
     this.order = order;
@@ -68,27 +69,28 @@ public class TodoDto {
   /**
    * Getter method for flag isCompleted of the todo item.
    *
-   * @return true if todo item is completed else false.
+   * @return true if todo item is isCompleted else false.
    */
+  @JsonProperty("isCompleted")
   public boolean isCompleted() {
     return isCompleted;
   }
 
   /**
-   * Getter method to created date time stamp for the todo item.
+   * Getter method to created date time for the todo item.
    *
-   * @return timestamp.
+   * @return LocalDateTime in the format '"yyyy-MM-dd'T'HH:mm:ss"' when todo is created.
    */
-  public Timestamp getCreatedDate() {
+  public LocalDateTime getCreatedDate() {
     return createdDate;
   }
 
   /**
-   * Getter method to updated date time stamp for the todo item.
+   * Getter method to updated date time for the todo item.
    *
-   * @return timestamp.
+   * @return LocalDateTime in the format '"yyyy-MM-dd'T'HH:mm:ss"' when todo is updated.
    */
-  public Timestamp getUpdatedDate() {
+  public LocalDateTime getUpdatedDate() {
     return updatedDate;
   }
 }

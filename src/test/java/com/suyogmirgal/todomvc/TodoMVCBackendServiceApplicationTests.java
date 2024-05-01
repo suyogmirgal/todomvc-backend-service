@@ -2,6 +2,7 @@ package com.suyogmirgal.todomvc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * Test class to test context load which verifies

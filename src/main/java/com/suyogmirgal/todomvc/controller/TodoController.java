@@ -29,7 +29,7 @@ public class TodoController {
   /**
    * Parametrized constructor for {@link TodoController}.
    *
-   * @param todoService instnace of {@link TodoService}.
+   * @param todoService instance of {@link TodoService}.
    */
   public TodoController(TodoService todoService) {
     this.todoService = todoService;
@@ -48,7 +48,7 @@ public class TodoController {
   }
 
   /**
-   * API Method to get all active and completed todos.
+   * API Method to get all active and isCompleted todos.
    *
    *
    * @return response {@link ResponseEntity} which holds Http Status and body List of {@link TodoDto}.
@@ -116,13 +116,13 @@ public class TodoController {
   }
 
   /**
-   * API Method to delete/clear all completed todos.
+   * API Method to delete/clear all isCompleted todos.
    *
    * @return response {@link ResponseEntity} which holds Http Status and message body.
    */
-  @RequestMapping(method = RequestMethod.DELETE, value = "/clear-completed-todos")
+  @RequestMapping(method = RequestMethod.DELETE, value = "/clear-isCompleted-todos")
   public ResponseEntity<String> deleteAllCompletedTodos() {
     long count = todoService.deleteAllCompletedTodos();
-    return ResponseEntity.status(HttpStatus.OK).body("Total " +count+" todos were completed are deleted.");
+    return ResponseEntity.status(HttpStatus.OK).body("Total " +count+" todos were isCompleted are deleted.");
   }
 }

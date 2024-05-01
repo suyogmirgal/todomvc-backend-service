@@ -7,11 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import java.sql.Timestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import java.time.LocalDateTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -42,14 +38,10 @@ public class TodoEntity {
   private boolean isCompleted;
 
   @Column(name = "created_date")
-  @CreatedDate
-  @Temporal(TemporalType.TIMESTAMP)
-  private Timestamp createdDate;
+  private LocalDateTime createdDate;
 
   @Column(name = "updated_date")
-  @LastModifiedDate
-  @Temporal(TemporalType.TIMESTAMP)
-  private Timestamp updatedDate;
+  private LocalDateTime updatedDate;
 
   /**
    * Getter method to get id of the todo record.
@@ -108,7 +100,7 @@ public class TodoEntity {
   /**
    * Getter method for flag isCompleted of the todo.
    *
-   * @return true if todo is completed else false.
+   * @return true if todo is isCompleted else false.
    */
   public boolean isCompleted() {
     return isCompleted;
@@ -117,45 +109,45 @@ public class TodoEntity {
   /**
    * Setter method for flag isCompleted of the todo.
    *
-   * @param completed true if todo is completed else false.
+   * @param completed true if todo is isCompleted else false.
    */
   public void setCompleted(boolean completed) {
     isCompleted = completed;
   }
 
   /**
-   * Getter method to created date time stamp for the todo.
+   * Getter method to get created date time for the todo.
    *
-   * @return timestamp.
+   * @return LocalDateTime.
    */
-  public Timestamp getCreatedDate() {
+  public LocalDateTime getCreatedDate() {
     return createdDate;
   }
 
   /**
-   * Setter method to created date time stamp for the todo.
+   * Setter method to created date time for the todo.
    *
-   * @param createdDate timestamp when toto is created.
+   * @param createdDate LocalDateTime when toto is created.
    */
-  public void setCreatedDate(Timestamp createdDate) {
+  public void setCreatedDate(LocalDateTime createdDate) {
     this.createdDate = createdDate;
   }
 
   /**
-   * Getter method to updated date time stamp for the todo.
+   * Getter method to updated date time for the todo.
    *
-   * @return timestamp.
+   * @return LocalDateTime.
    */
-  public Timestamp getUpdatedDate() {
+  public LocalDateTime getUpdatedDate() {
     return updatedDate;
   }
 
   /**
-   * Getter method to updated date time stamp for the todo.
+   * Getter method to get updated date time for the todo.
    *
-   * @param updatedDate timestamp when todo is updated.
+   * @param updatedDate LocalDateTime when todo is updated.
    */
-  public void setUpdatedDate(Timestamp updatedDate) {
+  public void setUpdatedDate(LocalDateTime updatedDate) {
     this.updatedDate = updatedDate;
   }
 }

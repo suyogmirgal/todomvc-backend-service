@@ -4,6 +4,8 @@ import com.suyogmirgal.todomvc.entity.TodoEntity;
 import com.suyogmirgal.todomvc.model.TodoDto;
 import com.suyogmirgal.todomvc.repository.TodoRepository;
 import jakarta.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TodoService {
+
+  static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
   private final TodoRepository todoRepository;
 
@@ -41,6 +45,10 @@ public class TodoService {
     TodoEntity todoEntity = new TodoEntity();
     todoEntity.setTitle(todoDto.getTitle());
     todoEntity.setOrder(todoDto.getOrder());
+    todoEntity.setCompleted(todoDto.isCompleted());
+    LocalDateTime now = format(LocalDateTime.now());
+    todoEntity.setCreatedDate(now);
+    todoEntity.setUpdatedDate(now);
     TodoEntity savedTodoEntity = todoRepository.save(todoEntity);
     return new TodoDto(savedTodoEntity.getId(), savedTodoEntity.getTitle(),
             savedTodoEntity.getOrder(), savedTodoEntity.isCompleted(),
@@ -64,7 +72,7 @@ public class TodoService {
   }
 
   /**
-   * This method provides list of all active and completed todos.
+   * This method provides list of all active and isCompleted todos.
    *
    * @return List of {@link TodoDto}.
    */
@@ -115,6 +123,10 @@ public class TodoService {
       if(updatedTodo.isCompleted()) {
         todoEntity.setCompleted(true);
       }
+
+      LocalDateTime now = format(LocalDateTime.now());
+      todoEntity.setUpdatedDate(now);
+
       TodoEntity updatedTodoEntity = todoRepository.save(todoEntity);
       return Optional.of(new TodoDto(updatedTodoEntity.getId(), updatedTodoEntity.getTitle(),
           updatedTodoEntity.getOrder(), updatedTodoEntity.isCompleted(), updatedTodoEntity.getCreatedDate(),
@@ -139,12 +151,16 @@ public class TodoService {
   }
 
   /**
-   * This method deletes all completed todos.
+   * This method deletes all isCompleted todos.
    *
-   * @return number of completed todo deleted.
+   * @return number of isCompleted todo deleted.
    */
   @Transactional
-  public long deleteAllCompletedTodos(){
+  public long  deleteAllCompletedTodos(){
     return todoRepository.deleteByIsCompleted(true);
+  }
+
+  private LocalDateTime format(LocalDateTime dateTime) {
+    return LocalDateTime.parse(dateTime.format(formatter), formatter);
   }
 }
